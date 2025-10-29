@@ -6,7 +6,7 @@ set -e
 
 echo "Building KTX.."
 cd KTX-Software
-cmake . -B build -DKTX_FEATURE_TOOLS=OFF -DBUILD_SHARED_LIBS=OFF -DKTX_FEATURE_TESTS=OFF
+cmake . -B build -DKTX_FEATURE_TOOLS=OFF -DBUILD_SHARED_LIBS=OFF -DKTX_FEATURE_TESTS=OFF -DCMAKE_BUILD_TYPE=Release
 if [ $(uname -s) = 'Darwin' ]; then
     make -j$(sysctl -n hw.ncpu) -C build
     LIB_EXT=darwin
