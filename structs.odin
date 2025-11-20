@@ -73,10 +73,10 @@ Texture :: struct {
  */
 Texture1 :: struct {
     using _:              Texture,
-    glFormat:             u32, // Format of the texture data, e.g., GL_RGB. 
-    glInternalformat:     u32, // Internal format of the texture data, e.g., GL_RGc.bool. 
-    glBaseInternalformat: u32, // Base format of the texture data, e.g., GL_RGB. 
-    glType:               u32, // Type of the texture data, e.g, GL_UNSIGNED_BYTE. struct ktxTexture1_private* _private; /*!< Private data. 
+    glFormat:             u32, // Format of the texture data, e.g., GL_RGB.
+    glInternalformat:     u32, // Internal format of the texture data, e.g., GL_RGc.bool.
+    glBaseInternalformat: u32, // Base format of the texture data, e.g., GL_RGB.
+    glType:               u32, // Type of the texture data, e.g, GL_UNSIGNED_BYTE. struct ktxTexture1_private* _private; /*!< Private data.
 }
 
 /**
@@ -110,15 +110,15 @@ TextureCreateInfo :: struct {
     glInternalformat: u32, // Internal format for the texture, e.g., GL_RGc.bool. Ignored when creating a ktxTexture2.
     vkFormat:         vk.Format, // VkFormat for texture. Ignored when creating a ktxTexture1.
     pDfd:             [^]u32, // Pointer to DFD. Used only when creating a ktxTexture2 and only if vkFormat is VK_FORMAT_UNDEFINED.
-    baseWidth:        u32, // Width of the base level of the texture. 
-    baseHeight:       u32, // Height of the base level of the texture. 
+    baseWidth:        u32, // Width of the base level of the texture.
+    baseHeight:       u32, // Height of the base level of the texture.
     baseDepth:        u32, // Depth of the base level of the texture.
     numDimensions:    u32, // Number of dimensions in the texture, 1, 2 or 3.
-    numLevels:        u32, // Number of mip levels in the texture. Should be 1 if @c generateMipmaps is KTX_TRUE; 
+    numLevels:        u32, // Number of mip levels in the texture. Should be 1 if @c generateMipmaps is KTX_TRUE;
     numLayers:        u32, // Number of array layers in the texture.
-    numFaces:         u32, // Number of faces: 6 for cube maps, 1 otherwise. 
+    numFaces:         u32, // Number of faces: 6 for cube maps, 1 otherwise.
     isArray:          c.bool, // Set to KTX_TRUE if the texture is to be an array texture. Means OpenGL will use a GL_TEXTURE_*_ARRAY target.
-    generateMipmaps:  c.bool, // Set to KTX_TRUE if mipmaps should be generated for the texture when loading into a 3D API. 
+    generateMipmaps:  c.bool, // Set to KTX_TRUE if mipmaps should be generated for the texture when loading into a 3D API.
 }
 
 /**
@@ -509,12 +509,18 @@ VulkanTexture :: struct {
  * These pointers must all be provided for upload or destroy to occur using suballocator callbacks.
  */
 VulkanTexture_subAllocatorCallbacks :: struct {
-    allocMemFuncPtr:    VulkanTexture_subAllocatorAllocMemFuncPtr, /*!< Pointer to the memory procurement function. Can suballocate one or more pages. */
-    bindBufferFuncPtr:  VulkanTexture_subAllocatorBindBufferFuncPtr, /*!< Pointer to bind-buffer-to-suballocation(s) function. */
-    bindImageFuncPtr:   VulkanTexture_subAllocatorBindImageFuncPtr, /*!< Pointer to bind-image-to-suballocation(s) function. */
-    memoryMapFuncPtr:   VulkanTexture_subAllocatorMemoryMapFuncPtr, /*!< Pointer to function for mapping the memory of a specific page. */
-    memoryUnmapFuncPtr: VulkanTexture_subAllocatorMemoryUnmapFuncPtr, /*!< Pointer to function for unmapping the memory of a specific page. */
-    freeMemFuncPtr:     VulkanTexture_subAllocatorFreeMemFuncPtr, /*!< Pointer to the free procurement function. */
+    allocMemFuncPtr:    VulkanTexture_subAllocatorAllocMemFuncPtr,
+    /*!< Pointer to the memory procurement function. Can suballocate one or more pages. */
+    bindBufferFuncPtr:  VulkanTexture_subAllocatorBindBufferFuncPtr,
+    /*!< Pointer to bind-buffer-to-suballocation(s) function. */
+    bindImageFuncPtr:   VulkanTexture_subAllocatorBindImageFuncPtr,
+    /*!< Pointer to bind-image-to-suballocation(s) function. */
+    memoryMapFuncPtr:   VulkanTexture_subAllocatorMemoryMapFuncPtr,
+    /*!< Pointer to function for mapping the memory of a specific page. */
+    memoryUnmapFuncPtr: VulkanTexture_subAllocatorMemoryUnmapFuncPtr,
+    /*!< Pointer to function for unmapping the memory of a specific page. */
+    freeMemFuncPtr:     VulkanTexture_subAllocatorFreeMemFuncPtr,
+    /*!< Pointer to the free procurement function. */
 }
 
 

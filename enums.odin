@@ -3,28 +3,28 @@ package libktx
 import "core:c"
 
 error_code_e :: enum (c.int) {
-    SUCCESS = 0, // Operation was successful. 
-    FILE_DATA_ERROR, // The data in the file is inconsistent with the spec. 
-    FILE_ISPIPE, // The file is a pipe or named pipe. 
-    FILE_OPEN_FAILED, // The target file could not be opened. 
-    FILE_OVERFLOW, // The operation would exceed the max file size. 
-    FILE_READ_ERROR, // An error occurred while reading from the file. 
-    FILE_SEEK_ERROR, // An error occurred while seeking in the file. 
-    FILE_UNEXPECTED_EOF, // File does not have enough data to satisfy request. 
-    FILE_WRITE_ERROR, // An error occurred while writing to the file. 
-    GL_ERROR, // GL operations resulted in an error. 
-    INVALID_OPERATION, // The operation is not allowed in the current state. 
-    INVALID_VALUE, // A parameter value was not valid. 
+    SUCCESS = 0, // Operation was successful.
+    FILE_DATA_ERROR, // The data in the file is inconsistent with the spec.
+    FILE_ISPIPE, // The file is a pipe or named pipe.
+    FILE_OPEN_FAILED, // The target file could not be opened.
+    FILE_OVERFLOW, // The operation would exceed the max file size.
+    FILE_READ_ERROR, // An error occurred while reading from the file.
+    FILE_SEEK_ERROR, // An error occurred while seeking in the file.
+    FILE_UNEXPECTED_EOF, // File does not have enough data to satisfy request.
+    FILE_WRITE_ERROR, // An error occurred while writing to the file.
+    GL_ERROR, // GL operations resulted in an error.
+    INVALID_OPERATION, // The operation is not allowed in the current state.
+    INVALID_VALUE, // A parameter value was not valid.
     NOT_FOUND, // Requested metadata key or required dynamically loaded GPU function was not found. */
-    OUT_OF_MEMORY, // Not enough memory to complete the operation. 
-    TRANSCODE_FAILED, // Transcoding of block compressed texture failed. 
-    UNKNOWN_FILE_FORMAT, // The file not a KTX file 
-    UNSUPPORTED_TEXTURE_TYPE, // The KTX file specifies an unsupported texture type. 
-    UNSUPPORTED_FEATURE, // Feature not included in in-use library or not yet implemented. 
-    LIBRARY_NOT_LINKED, //  Library dependency (OpenGL or Vulkan) not linked into application. 
+    OUT_OF_MEMORY, // Not enough memory to complete the operation.
+    TRANSCODE_FAILED, // Transcoding of block compressed texture failed.
+    UNKNOWN_FILE_FORMAT, // The file not a KTX file
+    UNSUPPORTED_TEXTURE_TYPE, // The KTX file specifies an unsupported texture type.
+    UNSUPPORTED_FEATURE, // Feature not included in in-use library or not yet implemented.
+    LIBRARY_NOT_LINKED, //  Library dependency (OpenGL or Vulkan) not linked into application.
     DECOMPRESS_LENGTH_ERROR, // Decompressed byte count does not match expected byte size */
-    DECOMPRESS_CHECKSUM_ERROR, // Checksum mismatch when decompressing 
-    ERROR_MAX_ENUM = DECOMPRESS_CHECKSUM_ERROR, // For safety checks. 
+    DECOMPRESS_CHECKSUM_ERROR, // Checksum mismatch when decompressing
+    ERROR_MAX_ENUM = DECOMPRESS_CHECKSUM_ERROR, // For safety checks.
 }
 
 Result :: error_code_e
@@ -56,10 +56,10 @@ class_id :: enum (c.int) {
  * @brief Enumerators identifying the supercompression scheme.
  */
 SupercmpScheme :: enum (c.int) {
-    KTX_SS_NONE               = 0, // No supercompression. 
-    KTX_SS_BASIS_LZ           = 1, // Basis LZ supercompression. 
-    KTX_SS_ZSTD               = 2, // ZStd supercompression. 
-    KTX_SS_ZLIB               = 3, // ZLIB supercompression. 
+    KTX_SS_NONE               = 0, // No supercompression.
+    KTX_SS_BASIS_LZ           = 1, // Basis LZ supercompression.
+    KTX_SS_ZSTD               = 2, // ZStd supercompression.
+    KTX_SS_ZLIB               = 3, // ZLIB supercompression.
     KTX_SS_BEGIN_RANGE        = KTX_SS_NONE,
     KTX_SS_END_RANGE          = KTX_SS_ZLIB,
     KTX_SS_BEGIN_VENDOR_RANGE = 0x10000,
@@ -75,8 +75,8 @@ SupercmpScheme :: enum (c.int) {
  * @sa ktxTexture1_Create() and ktxTexture2_Create().
  */
 TextureCreateStorageEnum :: enum (c.int) {
-    TEXTURE_CREATE_NO_STORAGE    = 0, // Don't allocate any image storage. 
-    TEXTURE_CREATE_ALLOC_STORAGE = 1, // Allocate image storage. 
+    TEXTURE_CREATE_NO_STORAGE    = 0, // Don't allocate any image storage.
+    TEXTURE_CREATE_ALLOC_STORAGE = 1, // Allocate image storage.
 }
 
 
@@ -87,10 +87,10 @@ TextureCreateStorageEnum :: enum (c.int) {
  * @sa ktxTexture_CreateFrom*
  */
 TextureCreateFlagBit :: enum (c.int) {
-    TEXTURE_CREATE_LOAD_IMAGE_DATA   = 0, //Load the images from the KTX source. 
-    TEXTURE_CREATE_RAW_KVDATA        = 1, //Load the raw key-value data instead of creating a @c ktxHashList from it. 
-    TEXTURE_CREATE_SKIP_KVDATA       = 2, // Skip any key-value data. This overrides the RAW_KVDATA_BIT. 
-    TEXTURE_CREATE_CHECK_GLTF_BASISU = 3, // Load texture compatible with the rulesof KHR_texture_basisu glTF extension 
+    TEXTURE_CREATE_LOAD_IMAGE_DATA   = 0, //Load the images from the KTX source.
+    TEXTURE_CREATE_RAW_KVDATA        = 1, //Load the raw key-value data instead of creating a @c ktxHashList from it.
+    TEXTURE_CREATE_SKIP_KVDATA       = 2, // Skip any key-value data. This overrides the RAW_KVDATA_BIT.
+    TEXTURE_CREATE_CHECK_GLTF_BASISU = 3, // Load texture compatible with the rulesof KHR_texture_basisu glTF extension
 }
 
 TextureCreateFlags :: distinct bit_set[TextureCreateFlagBit;u32]
@@ -100,18 +100,18 @@ TextureCreateFlags :: distinct bit_set[TextureCreateFlagBit;u32]
  * @brief Flags specifiying UASTC encoding options.
  */
 pack_uastc_flag_bits_e :: enum (c.int) {
-    PACK_UASTC_LEVEL_FASTEST                     = 0, // Fastest compression. 43.45dB. 
-    PACK_UASTC_LEVEL_FASTER                      = 1, // Faster compression. 46.49dB. 
-    PACK_UASTC_LEVEL_DEFAULT                     = 2, // Default compression. 47.47dB. 
-    PACK_UASTC_LEVEL_SLOWER                      = 3, // Slower compression. 48.01dB. 
-    PACK_UASTC_LEVEL_VERYSLOW                    = 4, // Very slow compression. 48.24dB. 
-    PACK_UASTC_MAX_LEVEL                         = PACK_UASTC_LEVEL_VERYSLOW, // Maximum supported quality level. 
-    PACK_UASTC_LEVEL_MASK                        = 0xF, // Mask to extract the level from the other bits. 
-    PACK_UASTC_FAVOR_UASTC_ERROR                 = 8, // Optimize for lowest UASTC error. 
-    PACK_UASTC_FAVOR_BC7_ERROR                   = 16, // Optimize for lowest BC7 error. 
-    PACK_UASTC_ETC1_FASTER_HINTS                 = 64, // Optimize for faster transcoding to ETC1. 
-    PACK_UASTC_ETC1_FASTEST_HINTS                = 128, // Optimize for fastest transcoding to ETC1. 
-    PACK_UASTC__ETC1_DISABLE_FLIP_AND_INDIVIDUAL = 256, // Not documented in BasisU code. 
+    PACK_UASTC_LEVEL_FASTEST                     = 0, // Fastest compression. 43.45dB.
+    PACK_UASTC_LEVEL_FASTER                      = 1, // Faster compression. 46.49dB.
+    PACK_UASTC_LEVEL_DEFAULT                     = 2, // Default compression. 47.47dB.
+    PACK_UASTC_LEVEL_SLOWER                      = 3, // Slower compression. 48.01dB.
+    PACK_UASTC_LEVEL_VERYSLOW                    = 4, // Very slow compression. 48.24dB.
+    PACK_UASTC_MAX_LEVEL                         = PACK_UASTC_LEVEL_VERYSLOW, // Maximum supported quality level.
+    PACK_UASTC_LEVEL_MASK                        = 0xF, // Mask to extract the level from the other bits.
+    PACK_UASTC_FAVOR_UASTC_ERROR                 = 8, // Optimize for lowest UASTC error.
+    PACK_UASTC_FAVOR_BC7_ERROR                   = 16, // Optimize for lowest BC7 error.
+    PACK_UASTC_ETC1_FASTER_HINTS                 = 64, // Optimize for faster transcoding to ETC1.
+    PACK_UASTC_ETC1_FASTEST_HINTS                = 128, // Optimize for fastest transcoding to ETC1.
+    PACK_UASTC__ETC1_DISABLE_FLIP_AND_INDIVIDUAL = 256, // Not documented in BasisU code.
 }
 
 pack_uastc_flags :: pack_uastc_flag_bits_e
@@ -122,11 +122,11 @@ pack_uastc_flags :: pack_uastc_flag_bits_e
  */
 pack_astc_quality_levels_e :: enum (c.int) {
     PACK_ASTC_QUALITY_LEVEL_FASTEST    = 0, //Fastest compression.
-    PACK_ASTC_QUALITY_LEVEL_FAST       = 10, // Fast compression. 
+    PACK_ASTC_QUALITY_LEVEL_FAST       = 10, // Fast compression.
     PACK_ASTC_QUALITY_LEVEL_MEDIUM     = 60, // Medium compression.
     PACK_ASTC_QUALITY_LEVEL_THOROUGH   = 98, // Slower compression.
     PACK_ASTC_QUALITY_LEVEL_EXHAUSTIVE = 100, // Very slow compression
-    PACK_ASTC_QUALITY_LEVEL_MAX        = PACK_ASTC_QUALITY_LEVEL_EXHAUSTIVE, // Maximum supported quality level. 
+    PACK_ASTC_QUALITY_LEVEL_MAX        = PACK_ASTC_QUALITY_LEVEL_EXHAUSTIVE, // Maximum supported quality level.
 }
 
 
@@ -160,7 +160,7 @@ pack_astc_block_dimension_e :: enum (c.int) {
     PACK_ASTC_BLOCK_DIMENSION_6x5x5, //: 0.85 bpp
     PACK_ASTC_BLOCK_DIMENSION_6x6x5, //: 0.71 bpp
     PACK_ASTC_BLOCK_DIMENSION_6x6x6, //: 0.59 bpp
-    PACK_ASTC_BLOCK_DIMENSION_MAX = PACK_ASTC_BLOCK_DIMENSION_6x6x6, // Maximum supported blocks. 
+    PACK_ASTC_BLOCK_DIMENSION_MAX = PACK_ASTC_BLOCK_DIMENSION_6x6x6, // Maximum supported blocks.
 }
 
 
